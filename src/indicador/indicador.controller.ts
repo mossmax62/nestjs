@@ -18,28 +18,58 @@ import { map } from 'rxjs';
 @Controller('indicador')
 export class IndicadorController {
   constructor(private readonly indicadorService: IndicadorService) {}
-  uf: AxiosResponse<Indicador[]>;
+
   @Post()
   create(@Body() createIndicadorDto: CreateIndicadorDto) {
     return this.indicadorService.create(createIndicadorDto);
   }
 
-  @Get()
-  findAll() {
-    return 'Hola Max';
-    //return this.indicadorService.findAll();
+  @Get('uf')
+  findAllUFs() {
+    //return 'Hola Max';
+    return this.indicadorService.findAllUFs();
+  }
+
+  @Get('usd')
+  findAllUSDs() {
+    //return 'Hola Max';
+    return this.indicadorService.findAllUSDs();
+  }
+
+  @Get('utm')
+  findAllUTMs() {
+    //return 'Hola Max';
+    return this.indicadorService.findAllUTMs();
   }
 
   @Get('uf/today')
-  async today() {
-    const ufs = await this.indicadorService.today();
-    return ufs;
+  async ufToday() {
+    return await this.indicadorService.ufToday();
+  }
+
+  @Get('usd/today')
+  async usdToday() {
+    return await this.indicadorService.usdToday();
+  }
+
+  @Get('utm/today')
+  async utmToday() {
+    return await this.indicadorService.utmToday();
   }
 
   @Get('uf/:year')
-  findAllForYear(@Param('year') year: string) {
-    return this.indicadorService.findAllForYear(+year);
-    //return 'findAllForYear';
+  findAllUFForYear(@Param('year') year: string) {
+    return this.indicadorService.findAllUFForYear(+year);
+  }
+
+  @Get('usd/:year')
+  findAllUSDForYear(@Param('year') year: string) {
+    return this.indicadorService.findAllUSDForYear(+year);
+  }
+
+  @Get('utm/:year')
+  findAllUTMForYear(@Param('year') year: string) {
+    return this.indicadorService.findAllUTMForYear(+year);
   }
 
   @Get(':id')
